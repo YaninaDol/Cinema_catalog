@@ -18,4 +18,36 @@ class User
         $this->isPremium=$isPremium;
     }
 
+    public function getLogin()
+    {
+        return $this->login;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    public function getPremium()
+    {
+        return $this->isPremium;
+    }
+    public function isCompare($item)
+    {
+       if($this->login===$item->getLogin() && $this->password===$item->getPassword())
+       {
+           return true;
+       }
+       else false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function __toString()
+    {
+       return 'Login:'.$this->login.' Password: '.$this->password.' isPremium: '.$this->isPremium;
+    }
 }
