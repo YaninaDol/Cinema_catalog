@@ -35,4 +35,45 @@ class Film
         $this->imdb=$imdb;
     }
 
+    public function __getName()
+    {
+        return $this->name;
+    }
+
+    public function __getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    public function __getImdb()
+    {
+        return $this->imdb;
+    }
+    public function __getCountry()
+    {
+        return $this->country;
+    }
+    public function __getisPopular()
+    {
+        return  $this->isPopular;
+    }
+    public function __getSubscribe()
+    {
+        return $this->subscribe;
+    }
+
+    public function isCompare($item)
+    {
+        if($this->name===$item->getName() && $this->categoryId===$item->getCategoryId() && $this->country===$item->getCountry()&& $this->subscribe===$item->getSubscribe())
+        {
+            return true;
+        }
+        else return false;
+    }
+
+
+    public function __toString()
+    {
+        return 'Name:'.$this->name.' Country: '.$this->country.' Imdb : '.$this->imdb.' isPremium: '.$this->isPremium.' Category ID: '.$this->categoryId.' Popular: '.$this->isPopular.' Subscribe: '.$this->subscribe;
+    }
 }

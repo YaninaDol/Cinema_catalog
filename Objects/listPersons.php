@@ -13,4 +13,27 @@ class listPersons
 
     }
 
+    public function __getFilmId()
+    {
+        return $this->filmId;
+    }
+    public function __getPersonId()
+    {
+        return $this->personId;
+    }
+
+    public function isCompare($item)
+    {
+        if($this->filmId===$item->getFilmId()&&$this->personId===$item->getPersonId() )
+        {
+            return true;
+        }
+        else return  false;
+    }
+
+    public function __toString()
+    {
+        return 'Film Id :'.$this->filmId.' Person Id: '.$this->personId;
+    }
+
 }
