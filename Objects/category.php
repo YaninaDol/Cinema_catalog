@@ -24,6 +24,10 @@ class Category
         else return  false;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
     public function __toString()
     {
         return 'Name :'.$this->name;

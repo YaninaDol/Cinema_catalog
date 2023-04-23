@@ -30,7 +30,10 @@ class listPersons
         }
         else return  false;
     }
-
+    public function getId()
+    {
+        return $this->id;
+    }
     public function __toString()
     {
         return 'Film Id :'.$this->filmId.' Person Id: '.$this->personId;

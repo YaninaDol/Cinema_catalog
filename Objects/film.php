@@ -71,7 +71,10 @@ class Film
         else return false;
     }
 
-
+    public function getId()
+    {
+        return $this->id;
+    }
     public function __toString()
     {
         return 'Name:'.$this->name.' Country: '.$this->country.' Imdb : '.$this->imdb.' isPremium: '.$this->isPremium.' Category ID: '.$this->categoryId.' Popular: '.$this->isPopular.' Subscribe: '.$this->subscribe;

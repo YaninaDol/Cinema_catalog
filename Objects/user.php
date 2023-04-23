@@ -12,7 +12,14 @@ class User
         $this->password=$password;
         $this->isPremium=0;
     }
-
+    public function setLogin($login)
+    {
+        $this->login=$login;
+    }
+    public function setPassword($password)
+    {
+        $this->password=$password;
+    }
     public function setPremium($isPremium)
     {
         $this->isPremium=$isPremium;
@@ -39,9 +46,6 @@ class User
        else return  false;
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
