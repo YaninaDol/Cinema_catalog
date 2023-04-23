@@ -1,4 +1,6 @@
 <?php
+
+namespace Objects;
 class Film
 {
     private $id;
@@ -11,28 +13,30 @@ class Film
     private $subscribe;
 
 
-    public function __construct($name,$categoryId,$imdb,$country,$isPopular,$isPremium,$subscribe)
+    public function __construct($name, $categoryId, $imdb, $country, $isPopular, $isPremium, $subscribe)
     {
-        $this->name=$name;
-        $this->categoryId=$categoryId;
-        $this->imdb=$imdb;
-        $this->country=$country;
-        $this->isPopular=$isPopular;
-        $this->isPremium=$isPremium;
-        $this->subscribe=$subscribe;
+        $this->name = $name;
+        $this->categoryId = $categoryId;
+        $this->imdb = $imdb;
+        $this->country = $country;
+        $this->isPopular = $isPopular;
+        $this->isPremium = $isPremium;
+        $this->subscribe = $subscribe;
     }
 
     public function setPremium($isPremium)
     {
-        $this->isPremium=$isPremium;
+        $this->isPremium = $isPremium;
     }
+
     public function setPopular($isPopular)
     {
-        $this->isPopular=$isPopular;
+        $this->isPopular = $isPopular;
     }
+
     public function setImdb($imdb)
     {
-        $this->imdb=$imdb;
+        $this->imdb = $imdb;
     }
 
     public function __getName()
@@ -49,14 +53,17 @@ class Film
     {
         return $this->imdb;
     }
+
     public function __getCountry()
     {
         return $this->country;
     }
+
     public function __getisPopular()
     {
-        return  $this->isPopular;
+        return $this->isPopular;
     }
+
     public function __getSubscribe()
     {
         return $this->subscribe;
@@ -64,19 +71,18 @@ class Film
 
     public function isCompare($item)
     {
-        if($this->name===$item->getName() && $this->categoryId===$item->getCategoryId() && $this->country===$item->getCountry()&& $this->subscribe===$item->getSubscribe())
-        {
+        if ($this->name === $item->getName() && $this->categoryId === $item->getCategoryId() && $this->country === $item->getCountry() && $this->subscribe === $item->getSubscribe()) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     public function getId()
     {
         return $this->id;
     }
+
     public function __toString()
     {
-        return 'Name:'.$this->name.' Country: '.$this->country.' Imdb : '.$this->imdb.' isPremium: '.$this->isPremium.' Category ID: '.$this->categoryId.' Popular: '.$this->isPopular.' Subscribe: '.$this->subscribe;
+        return 'Name:' . $this->name . ' Country: ' . $this->country . ' Imdb : ' . $this->imdb . ' isPremium: ' . $this->isPremium . ' Category ID: ' . $this->categoryId . ' Popular: ' . $this->isPopular . ' Subscribe: ' . $this->subscribe;
     }
 }

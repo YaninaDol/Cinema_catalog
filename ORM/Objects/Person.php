@@ -1,4 +1,6 @@
 <?php
+
+namespace Objects;
 class Person
 {
     private $id;
@@ -6,10 +8,10 @@ class Person
     private $roleId;
 
 
-    public function __construct($name,$roleId)
+    public function __construct($name, $roleId)
     {
-        $this->name=$name;
-        $this->roleId=$roleId;
+        $this->name = $name;
+        $this->roleId = $roleId;
 
     }
 
@@ -17,6 +19,7 @@ class Person
     {
         return $this->name;
     }
+
     public function __getRoleId()
     {
         return $this->roleId;
@@ -24,19 +27,19 @@ class Person
 
     public function isCompare($item)
     {
-        if($this->name===$item->getName()&&$this->roleId===$item->getRoleId() )
-        {
+        if ($this->name === $item->getName() && $this->roleId === $item->getRoleId()) {
             return true;
-        }
-        else return  false;
+        } else return false;
     }
+
     public function getId()
     {
         return $this->id;
     }
+
     public function __toString()
     {
-        return 'Name :'.$this->name.' Role Id: '.$this->roleId;
+        return 'Name :' . $this->name . ' Role Id: ' . $this->roleId;
     }
 
 }

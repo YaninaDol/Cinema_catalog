@@ -1,7 +1,12 @@
 <?php
 
+namespace Controllers;
+
+use Database;
+
 require_once('db.php');
 include 'AbstractController.php';
+
 class UserController extends AbstractController
 {
     private $db;
@@ -16,16 +21,16 @@ class UserController extends AbstractController
     public function fill()
     {
         $sql_select = 'SELECT * FROM user';
-        $res=$this->db->select( $sql_select);
-        foreach ($res as $iter){
-            array_push($this->array_db,new user($iter['id'],$iter['login'],$iter['password']));
+        $res = $this->db->select($sql_select);
+        foreach ($res as $iter) {
+            array_push($this->array_db, new user($iter['id'], $iter['login'], $iter['password']));
         }
     }
 
     public function addModel($model)
     {
         // добавление модели в локальный массив
-        array_push($this->array_db,$model);
+        array_push($this->array_db, $model);
         // добавление модели в базу данных
         $query = "INSERT INTO 	user (login, password,isPremium) VALUES (:login,:password, :isPremium)";
         $params = array(
@@ -48,9 +53,10 @@ class UserController extends AbstractController
         return $result;
     }
 
-    public function updateModel($id,$login,$password) {
+    public function updateModel($id, $login, $password)
+    {
         // обновление модели в массиве
-        $this->updateInArray($id,$login,$password);
+        $this->updateInArray($id, $login, $password);
 
         // обновление модели в базе данных
         $query = "UPDATE user SET login=:login, password=:password WHERE id=:id";
@@ -63,17 +69,17 @@ class UserController extends AbstractController
         return $result;
     }
 
-    public function updatePremium($id,$premium)
+    public function updatePremium($id, $premium)
     {
         // обновление модели в массиве
-     $item=$this->findItem($id);
-     $item->setPremium($premium) ;
+        $item = $this->findItem($id);
+        $item->setPremium($premium);
 
         $this->updateInArray($item);
         // обновление модели в базе данных
         $query = "UPDATE user SET isPremium=:isPremium WHERE id=:id";
         $params = array(
-            ':id' =>$id,
+            ':id' => $id,
             ':isPremium' => $premium
         );
         $result = $this->db->execute($query, $params);
@@ -83,15 +89,16 @@ class UserController extends AbstractController
     public function select()
     {
         $sql_select = 'SELECT * FROM user';
-       $res=$this->db->select( $sql_select);
-        foreach ($res as $iter){
-            echo '<div>'.$iter['id'].' - '.$iter['login'].' - '.$iter['password'].' - '.$iter['isPremium'].'</div>';
+        $res = $this->db->select($sql_select);
+        foreach ($res as $iter) {
+            echo '<div>' . $iter['id'] . ' - ' . $iter['login'] . ' - ' . $iter['password'] . ' - ' . $iter['isPremium'] . '</div>';
         }
     }
+
     public function printAll()
     {
-        foreach ($this->array_db as $iter){
-            echo '<p>'.$iter.'</p>';
+        foreach ($this->array_db as $iter) {
+            echo '<p>' . $iter . '</p>';
         }
     }
 }

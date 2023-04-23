@@ -1,4 +1,6 @@
 <?php
+
+namespace Objects;
 class Role
 {
     private $id;
@@ -7,7 +9,7 @@ class Role
 
     public function __construct($name)
     {
-        $this->name=$name;
+        $this->name = $name;
 
     }
 
@@ -18,18 +20,18 @@ class Role
 
     public function isCompare($item)
     {
-        if($this->name===$item->getName() )
-        {
+        if ($this->name === $item->getName()) {
             return true;
-        }
-        else return  false;
+        } else return false;
     }
+
     public function getId()
     {
         return $this->id;
     }
+
     public function __toString()
     {
-        return 'Name :'.$this->name;
+        return 'Name :' . $this->name;
     }
 }

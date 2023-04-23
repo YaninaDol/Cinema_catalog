@@ -1,4 +1,7 @@
 <?php
+
+use Controllers\UserController;
+
 require_once 'Controllers/UserController.php';
 require_once 'Objects/User.php';
 

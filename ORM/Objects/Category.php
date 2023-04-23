@@ -1,4 +1,6 @@
 <?php
+
+namespace Objects;
 class Category
 {
     private $id;
@@ -7,29 +9,29 @@ class Category
 
     public function __construct($name)
     {
-        $this->name=$name;
+        $this->name = $name;
 
     }
+
     public function __getName()
     {
-       return $this->name;
+        return $this->name;
     }
 
     public function isCompare($item)
     {
-        if($this->name===$item->getName() )
-        {
+        if ($this->name === $item->getName()) {
             return true;
-        }
-        else return  false;
+        } else return false;
     }
 
     public function getId()
     {
         return $this->id;
     }
+
     public function __toString()
     {
-        return 'Name :'.$this->name;
+        return 'Name :' . $this->name;
     }
 }
