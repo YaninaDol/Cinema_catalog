@@ -10,6 +10,16 @@ class userController extends Controller
     {
         $this->db = Database::getInstance();
         parent::__construct();
+        $this->fill();
+    }
+
+    public function fill()
+    {
+        $sql_select = 'SELECT * FROM user';
+        $res=$this->db->select( $sql_select);
+        foreach ($res as $iter){
+            array_push($this->array_db,new user($iter['id'],$iter['login'],$iter['password']));
+        }
     }
 
     public function addModel($model)
@@ -21,7 +31,7 @@ class userController extends Controller
         $params = array(
             ':login' => $model->getLogin(),
             ':password' => $model->getPassword(),
-            ':isPremium' => $model->getIsPremium()
+            ':isPremium' => $model->getPremium()
         );
         $result = $this->db->execute($query, $params);
         return $result;
@@ -38,16 +48,16 @@ class userController extends Controller
         return $result;
     }
 
-    public function updateModel($model) {
+    public function updateModel($id,$login,$password) {
         // обновление модели в массиве
-        $this->updateInArray($model);
+        $this->updateInArray($id,$login,$password);
 
         // обновление модели в базе данных
         $query = "UPDATE user SET login=:login, password=:password WHERE id=:id";
         $params = array(
-            ':id' => $model->getId(),
-            ':login' => $model->getLogin(),
-            ':password' => $model->getPassword()
+            ':id' => $id,
+            ':login' => $login,
+            ':password' => $password
         );
         $result = $this->db->execute($query, $params);
         return $result;
@@ -68,6 +78,21 @@ class userController extends Controller
         );
         $result = $this->db->execute($query, $params);
         return $result;
+    }
+
+    public function select()
+    {
+        $sql_select = 'SELECT * FROM user';
+       $res=$this->db->select( $sql_select);
+        foreach ($res as $iter){
+            echo '<div>'.$iter['id'].' - '.$iter['login'].' - '.$iter['password'].' - '.$iter['isPremium'].'</div>';
+        }
+    }
+    public function printAll()
+    {
+        foreach ($this->array_db as $iter){
+            echo '<p>'.$iter.'</p>';
+        }
     }
 }
 

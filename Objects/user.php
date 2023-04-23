@@ -6,8 +6,9 @@ class User
     private $password;
     private $isPremium;
 
-    public function __construct($login,$password)
+    public function __construct($id,$login,$password)
     {
+        $this->id=$id;
         $this->login=$login;
         $this->password=$password;
         $this->isPremium=0;

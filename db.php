@@ -35,5 +35,12 @@ class Database
         $stmt->execute($params);
         return $stmt->rowCount();
     }
+    public function select($query)
+    {
+        $res = $this->conn->query($query);
+
+       return $res;
+
+    }
 }
 

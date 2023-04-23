@@ -6,7 +6,9 @@ abstract class Controller
     public function __construct()
     {
     $this->array_db=array();
+
     }
+    abstract function fill();
     abstract function addModel($model);
 
     abstract function deleteModel($id);
@@ -23,11 +25,11 @@ abstract class Controller
         $this->array_db=array_values($arr2);
     }
 
-        public function findKey($item)
+        public function findKey($item,$strict=TRUE)
         {
-            if(($key = array_search($item, $this->array_db, $strict=TRUE)) !== FALSE)
+            if(($key = array_search($item, $this->array_db, $strict)) !== FALSE)
 
-                return $key;
+            {return $key;}
             else return null;
         }
 
@@ -35,20 +37,25 @@ abstract class Controller
         {
 
 
-            foreach ( $this->array_db as $element ) {
+            foreach ( $this->array_db as $element )
+            {
+
                 if ( $id == $element->getId() ) {
+
                     return $element;
+
                 }
             }
 
-            return false;
+            echo null;
 
         }
-    abstract function updateModel($model);
+    abstract function updateModel($id,$login,$password);
 
-    public function updateInArray($item)
+    public function updateInArray($id,$login,$password)
     {
-        $this->array_db[$this->findKey($this->findItem($item->getId()))]->setLogin($item->getLogin());
-        $this->array_db[$this->findKey($this->findItem($item->getId()))]->setPassword($item->getPassword());
+        $KEY=$this->findKey($this->findItem($id));
+       $this->array_db[$KEY]->setLogin($login);
+     $this->array_db[$KEY]->setPassword($password);
     }
 }
