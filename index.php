@@ -1,8 +1,8 @@
 <?php
-require_once 'Controllers/userController.php';
-require_once 'Objects/user.php';
+require_once 'Controllers/UserController.php';
+require_once 'Objects/User.php';
 
-$test=new userController();
+$test=new UserController();
 $test->updateModel(4,'test8','test8');
 $test->select();
 

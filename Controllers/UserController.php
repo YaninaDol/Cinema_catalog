@@ -1,8 +1,8 @@
 <?php
 
 require_once('db.php');
-include 'controller.php';
-class userController extends Controller
+include 'AbstractController.php';
+class UserController extends AbstractController
 {
     private $db;
 
