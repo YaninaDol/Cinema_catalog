@@ -7,13 +7,14 @@ class Role
     private $name;
 
 
-    public function __construct($name)
+    public function __construct($id,$name)
     {
+        $this->id=$id;
         $this->name = $name;
 
     }
 
-    public function __getName()
+    public function getName()
     {
         return $this->name;
     }
@@ -32,6 +33,6 @@ class Role
 
     public function __toString()
     {
-        return 'Name :' . $this->name;
+        return 'ID :' . $this->id.'Name :' . $this->name;
     }
 }
