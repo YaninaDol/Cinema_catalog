@@ -8,19 +8,20 @@ class listPersons
     private $personId;
 
 
-    public function __construct($filmId, $personId)
+    public function __construct($id,$filmId, $personId)
     {
+        $this->id=$id;
         $this->filmId = $filmId;
         $this->personId = $personId;
 
     }
 
-    public function __getFilmId()
+    public function getFilmId()
     {
         return $this->filmId;
     }
 
-    public function __getPersonId()
+    public function getPersonId()
     {
         return $this->personId;
     }
@@ -39,7 +40,7 @@ class listPersons
 
     public function __toString()
     {
-        return 'Film Id :' . $this->filmId . ' Person Id: ' . $this->personId;
+        return 'Id :' . $this->id .'Film Id :' . $this->filmId . ' Person Id: ' . $this->personId;
     }
 
 }

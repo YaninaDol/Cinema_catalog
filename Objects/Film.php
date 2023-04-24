@@ -13,8 +13,9 @@ class Film
     private $subscribe;
 
 
-    public function __construct($name, $categoryId, $imdb, $country, $isPopular, $isPremium, $subscribe)
+    public function __construct($id,$name, $categoryId, $imdb, $country, $isPopular, $isPremium, $subscribe)
     {
+        $this->id=$id;
         $this->name = $name;
         $this->categoryId = $categoryId;
         $this->imdb = $imdb;
@@ -39,34 +40,38 @@ class Film
         $this->imdb = $imdb;
     }
 
-    public function __getName()
+    public function getName()
     {
         return $this->name;
     }
 
-    public function __getCategoryId()
+    public function getCategoryId()
     {
         return $this->categoryId;
     }
 
-    public function __getImdb()
+    public function getImdb()
     {
         return $this->imdb;
     }
 
-    public function __getCountry()
+    public function getCountry()
     {
         return $this->country;
     }
 
-    public function __getisPopular()
+    public function getisPopular()
     {
         return $this->isPopular;
     }
 
-    public function __getSubscribe()
+    public function getSubscribe()
     {
         return $this->subscribe;
+    }
+    public function getisPremium()
+    {
+        return $this->isPremium;
     }
 
     public function isCompare($item)
@@ -83,6 +88,6 @@ class Film
 
     public function __toString()
     {
-        return 'Name:' . $this->name . ' Country: ' . $this->country . ' Imdb : ' . $this->imdb . ' isPremium: ' . $this->isPremium . ' Category ID: ' . $this->categoryId . ' Popular: ' . $this->isPopular . ' Subscribe: ' . $this->subscribe;
+        return 'ID:'.$this->id.'Name:' . $this->name . ' Country: ' . $this->country . ' Imdb : ' . $this->imdb . ' isPremium: ' . $this->isPremium . ' Category ID: ' . $this->categoryId . ' Popular: ' . $this->isPopular . ' Subscribe: ' . $this->subscribe;
     }
 }
