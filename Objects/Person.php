@@ -8,19 +8,20 @@ class Person
     private $roleId;
 
 
-    public function __construct($name, $roleId)
+    public function __construct($id,$name, $roleId)
     {
+        $this->id=$id;
         $this->name = $name;
         $this->roleId = $roleId;
 
     }
 
-    public function __getName()
+    public function getName()
     {
         return $this->name;
     }
 
-    public function __getRoleId()
+    public function getRoleId()
     {
         return $this->roleId;
     }
@@ -39,7 +40,7 @@ class Person
 
     public function __toString()
     {
-        return 'Name :' . $this->name . ' Role Id: ' . $this->roleId;
+        return 'ID :' . $this->id .'Name :' . $this->name . ' Role Id: ' . $this->roleId;
     }
 
 }
