@@ -2,17 +2,26 @@
 
 
 
-require_once 'Controllers/UserController.php';
+require_once 'Controllers/CategoryController.php';
 
-
-$test=new UserController();
+//test UserController
+//$test=new UserController();
 //$test->printAll();
-//$test->addModel('Test2','test2');
+//$test->addModel(new \Objects\User('0','test','test'));
 //$test->printAll();
-//$test->deleteModel(7);
+//$test->deleteModel(9);
 //$test->printAll();
-//$test->updateModel(4,'test4','test4');
+//$test->updateModel(4,new \Objects\User('0','test','test'));
 //$test->select();
+//$test->printAll();
 
-
-$test->printAll();
+//test CategoryController
+//$test=new CategoryController();
+//$test->printAll();
+//$test->addModel(new \Objects\Category('0','first'));
+//$test->printAll();
+//$test->deleteModel(4);
+//$test->printAll();
+//$test->updateModel(1,new \Objects\Category('0','test'));
+//$test->select();
+//$test->printAll();

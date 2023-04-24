@@ -27,14 +27,14 @@ class UserController extends AbstractController
         }
     }
 
-    public function addModel($login,$password)
+    public function addModel($model)
     {
 
         // добавление модели в базу данных
         $query = "INSERT INTO 	user (login, password,isPremium) VALUES (:login,:password, :isPremium)";
         $params = array(
-            ':login' =>$login,
-            ':password' => $password,
+            ':login' =>$model->getLogin(),
+            ':password' => $model->getPassword(),
             ':isPremium' => 0
         );
         $result = $this->db->execute($query, $params);
@@ -57,17 +57,17 @@ class UserController extends AbstractController
         return $result;
     }
 
-    public function updateModel($id, $login, $password)
+    public function updateModel($id, $model)
     {
         // обновление модели в массиве
-        $this->updateInArray($id, $login, $password);
+        $this->updateInArray($id, $model->getLogin(), $model->getPassword());
 
         // обновление модели в базе данных
         $query = "UPDATE user SET login=:login, password=:password WHERE id=:id";
         $params = array(
             ':id' => $id,
-            ':login' => $login,
-            ':password' => $password
+            ':login' => $model->getLogin(),
+            ':password' => $model->getPassword()
         );
         $result = $this->db->execute($query, $params);
         return $result;

@@ -13,7 +13,7 @@ abstract class AbstractController
 
     abstract function fill();
 
-    abstract function addModel($login,$password);
+    abstract function addModel($model);
 
     abstract function deleteModel($id);
 
@@ -53,7 +53,7 @@ abstract class AbstractController
 
     }
 
-    abstract function updateModel($id, $login, $password);
+    abstract function updateModel($id, $model);
 
     public function updateInArray($id, $login, $password)
     {
