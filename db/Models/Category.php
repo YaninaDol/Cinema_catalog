@@ -1,18 +1,16 @@
 <?php
 
-namespace Objects;
-class Person
+namespace db\Objects;
+class Category
 {
     private $id;
     private $name;
-    private $roleId;
 
 
-    public function __construct($id,$name, $roleId)
+    public function __construct($id,$name)
     {
         $this->id=$id;
         $this->name = $name;
-        $this->roleId = $roleId;
 
     }
 
@@ -21,14 +19,9 @@ class Person
         return $this->name;
     }
 
-    public function getRoleId()
-    {
-        return $this->roleId;
-    }
-
     public function isCompare($item)
     {
-        if ($this->name === $item->getName() && $this->roleId === $item->getRoleId()) {
+        if ($this->name === $item->getName()) {
             return true;
         } else return false;
     }
@@ -40,7 +33,6 @@ class Person
 
     public function __toString()
     {
-        return 'ID :' . $this->id .'Name :' . $this->name . ' Role Id: ' . $this->roleId;
+        return 'ID :' . $this->id.'Name :' . $this->name;
     }
-
 }

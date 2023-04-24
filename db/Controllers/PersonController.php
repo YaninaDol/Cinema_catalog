@@ -1,12 +1,15 @@
 <?php
 
-use Controllers\AbstractController;
-use Objects\Category;
+namespace db\Controllers;
 
-require_once('db.php');
-require_once ('AbstractController.php');
-require_once ('Objects/Category.php');
-class CategoryController extends AbstractController
+use Database;
+use db\Objects\Person;
+
+require_once('db/db.php');
+require_once('AbstractController.php');
+require_once('db/Models/Person.php');
+
+class PersonController extends AbstractController
 {
     private $db;
 
@@ -19,11 +22,11 @@ class CategoryController extends AbstractController
 
     public function fill()
     {
-        $this->array_db=array();
-        $sql_select = 'SELECT * FROM category';
+        $this->array_db = array();
+        $sql_select = 'SELECT * FROM person';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
-            array_push($this->array_db, new Category($iter['id'], $iter['name']));
+            array_push($this->array_db, new Person($iter['id'], $iter['name'], $iter['roleId']));
         }
     }
 
@@ -31,9 +34,10 @@ class CategoryController extends AbstractController
     {
 
         // добавление модели в базу данных
-        $query = "INSERT INTO 	category (name) VALUES (:name)";
+        $query = "INSERT INTO 	person (name,roleId) VALUES (:name,:roleId)";
         $params = array(
-            ':name' =>$model->getName()
+            ':name' => $model->getName(),
+            ':roleId' => $model->getRoleId()
         );
         $result = $this->db->execute($query, $params);
 
@@ -46,7 +50,7 @@ class CategoryController extends AbstractController
     {
 
         // удаление модели из базы данных
-        $query = "DELETE FROM category WHERE id=:id";
+        $query = "DELETE FROM person WHERE id=:id";
         $params = array(':id' => $id);
         $result = $this->db->execute($query, $params);
 
@@ -59,10 +63,11 @@ class CategoryController extends AbstractController
     {
 
         // обновление модели в базе данных
-        $query = "UPDATE category SET name=:name WHERE id=:id";
+        $query = "UPDATE person SET name=:name, roleId=:roleId WHERE id=:id";
         $params = array(
             ':id' => $id,
-            ':name' => $model->getName()
+            ':name' => $model->getName(),
+            ':roleId' => $model->getRoleId()
         );
         $result = $this->db->execute($query, $params);
         // обновление  локального массива
@@ -72,13 +77,12 @@ class CategoryController extends AbstractController
     }
 
 
-
     public function select()
     {
-        $sql_select = 'SELECT * FROM category';
+        $sql_select = 'SELECT * FROM person';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
-            echo '<div>' . $iter['id'] . ' - ' . $iter['name'] . '</div>';
+            echo '<div>' . $iter['id'] . ' - ' . $iter['name'] . ' - ' . $iter['roleId'] . '</div>';
         }
     }
 

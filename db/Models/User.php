@@ -1,6 +1,6 @@
 <?php
 
-namespace Objects;
+namespace db\Objects;
 class User
 {
     private $id;

@@ -1,12 +1,15 @@
 <?php
 
-use Controllers\AbstractController;
-use Objects\Film;
+namespace db\Controllers;
 
-require_once('db.php');
-require_once ('AbstractController.php');
-require_once ('Objects/Film.php');
-class FilmController extends AbstractController
+use Database;
+use db\Objects\User;
+
+require_once('db/db.php');
+require_once('AbstractController.php');
+require_once('db/Models/User.php');
+
+class UserController extends AbstractController
 {
     private $db;
 
@@ -19,11 +22,11 @@ class FilmController extends AbstractController
 
     public function fill()
     {
-        $this->array_db=array();
-        $sql_select = 'SELECT * FROM film';
+        $this->array_db = array();
+        $sql_select = 'SELECT * FROM user';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
-            array_push($this->array_db, new Film($iter['id'], $iter['name'], $iter['category'], $iter['imdb'], $iter['country'], $iter['isPopular'], $iter['isPremium'],$iter['subscribe']));
+            array_push($this->array_db, new User($iter['id'], $iter['login'], $iter['password']));
         }
     }
 
@@ -31,16 +34,11 @@ class FilmController extends AbstractController
     {
 
         // добавление модели в базу данных
-        $query = "INSERT INTO film ( name,category,imdb,country,isPopular,isPremium,subscribe) VALUES (:name, :category, :imdb, :country, :isPopular, :isPremium, :subscribe)";
+        $query = "INSERT INTO 	user (login, password,isPremium) VALUES (:login,:password, :isPremium)";
         $params = array(
-            ':name' =>$model->getName(),
-            ':category' => $model->getCategoryId(),
-            ':imdb' => $model->getImdb(),
-            ':country' => $model->getCountry(),
-            ':isPopular' => $model->getisPopular(),
-            ':isPremium' => $model->getisPremium(),
-            ':subscribe' => $model->getSubscribe()
-
+            ':login' => $model->getLogin(),
+            ':password' => $model->getPassword(),
+            ':isPremium' => 0
         );
         $result = $this->db->execute($query, $params);
 
@@ -53,7 +51,7 @@ class FilmController extends AbstractController
     {
 
         // удаление модели из базы данных
-        $query = "DELETE FROM film WHERE id=:id";
+        $query = "DELETE FROM user WHERE id=:id";
         $params = array(':id' => $id);
         $result = $this->db->execute($query, $params);
 
@@ -64,22 +62,17 @@ class FilmController extends AbstractController
 
     public function updateModel($id, $model)
     {
+        // обновление модели в массиве
+        $this->updateInArray($id, $model->getLogin(), $model->getPassword());
 
         // обновление модели в базе данных
-        $query = "UPDATE film SET name=:name, category=:category, imdb=:imdb,country=:country,isPopular=:isPopular,isPremium=:isPremium,subscribe=:subscribe WHERE id=:id";
+        $query = "UPDATE user SET login=:login, password=:password WHERE id=:id";
         $params = array(
             ':id' => $id,
-            ':name' =>$model->getName(),
-            ':category' => $model->getCategoryId(),
-            ':imdb' => $model->getImdb(),
-            ':country' => $model->getCountry(),
-            ':isPopular' => $model->getisPopular(),
-            ':isPremium' => $model->getisPremium(),
-            ':subscribe' => $model->getSubscribe()
+            ':login' => $model->getLogin(),
+            ':password' => $model->getPassword()
         );
         $result = $this->db->execute($query, $params);
-        // обновление  локального массива
-        $this->fill();
         return $result;
     }
 
@@ -102,10 +95,10 @@ class FilmController extends AbstractController
 
     public function select()
     {
-        $sql_select = 'SELECT * FROM film';
+        $sql_select = 'SELECT * FROM user';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
-            echo '<div>' . $iter['id'] . ' - ' . $iter['name'] . ' - ' . $iter['category'] . ' - '. $iter['imdb'] . ' - '. $iter['country'] . ' - ' . $iter['isPopular'] .' - ' . $iter['isPremium'] . ' - '. $iter['subscribe'] . '</div>';
+            echo '<div>' . $iter['id'] . ' - ' . $iter['login'] . ' - ' . $iter['password'] . ' - ' . $iter['isPremium'] . '</div>';
         }
     }
 

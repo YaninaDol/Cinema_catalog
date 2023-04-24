@@ -1,12 +1,15 @@
 <?php
 
-use Controllers\AbstractController;
-use Objects\Role;
+namespace db\Controllers;
 
-require_once('db.php');
-require_once ('AbstractController.php');
-require_once ('Objects/Role.php');
-class RoleController extends AbstractController
+use Database;
+use db\Objects\Category;
+
+require_once('db/db.php');
+require_once('AbstractController.php');
+require_once('db/Models/Category.php');
+
+class CategoryController extends AbstractController
 {
     private $db;
 
@@ -19,11 +22,11 @@ class RoleController extends AbstractController
 
     public function fill()
     {
-        $this->array_db=array();
-        $sql_select = 'SELECT * FROM role';
+        $this->array_db = array();
+        $sql_select = 'SELECT * FROM category';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
-            array_push($this->array_db, new Role($iter['id'], $iter['name']));
+            array_push($this->array_db, new Category($iter['id'], $iter['name']));
         }
     }
 
@@ -31,9 +34,9 @@ class RoleController extends AbstractController
     {
 
         // добавление модели в базу данных
-        $query = "INSERT INTO 	role (name) VALUES (:name)";
+        $query = "INSERT INTO 	category (name) VALUES (:name)";
         $params = array(
-            ':name' =>$model->getName()
+            ':name' => $model->getName()
         );
         $result = $this->db->execute($query, $params);
 
@@ -46,7 +49,7 @@ class RoleController extends AbstractController
     {
 
         // удаление модели из базы данных
-        $query = "DELETE FROM role WHERE id=:id";
+        $query = "DELETE FROM category WHERE id=:id";
         $params = array(':id' => $id);
         $result = $this->db->execute($query, $params);
 
@@ -59,7 +62,7 @@ class RoleController extends AbstractController
     {
 
         // обновление модели в базе данных
-        $query = "UPDATE role SET name=:name WHERE id=:id";
+        $query = "UPDATE category SET name=:name WHERE id=:id";
         $params = array(
             ':id' => $id,
             ':name' => $model->getName()
@@ -72,10 +75,9 @@ class RoleController extends AbstractController
     }
 
 
-
     public function select()
     {
-        $sql_select = 'SELECT * FROM role';
+        $sql_select = 'SELECT * FROM category';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
             echo '<div>' . $iter['id'] . ' - ' . $iter['name'] . '</div>';

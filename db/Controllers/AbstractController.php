@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers;
+namespace db\Controllers;
 abstract class AbstractController
 {
     protected $array_db;

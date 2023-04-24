@@ -1,14 +1,16 @@
 <?php
 
 
-use Controllers\AbstractController;
-use Objects\Person;
+namespace db\Controllers;
 
-require_once('db.php');
+use Database;
+use db\Objects\ListPersons;
+
+require_once('db/db.php');
 require_once('AbstractController.php');
-require_once('Objects/Person.php');
+require_once('db/Models/ListPersons.php');
 
-class PersonController extends AbstractController
+class ListPersonsController extends AbstractController
 {
     private $db;
 
@@ -22,10 +24,10 @@ class PersonController extends AbstractController
     public function fill()
     {
         $this->array_db = array();
-        $sql_select = 'SELECT * FROM person';
+        $sql_select = 'SELECT * FROM list';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
-            array_push($this->array_db, new Person($iter['id'], $iter['name'],$iter['roleId']));
+            array_push($this->array_db, new ListPersons($iter['id'], $iter['filmId'], $iter['personId']));
         }
     }
 
@@ -33,10 +35,10 @@ class PersonController extends AbstractController
     {
 
         // добавление модели в базу данных
-        $query = "INSERT INTO 	person (name,roleId) VALUES (:name,:roleId)";
+        $query = "INSERT INTO 	list (filmId,personId) VALUES (:filmId,:personId)";
         $params = array(
-            ':name' => $model->getName(),
-            ':roleId' => $model->getRoleId()
+            ':filmId' => $model->getFilmId(),
+            ':personId' => $model->getPersonId()
         );
         $result = $this->db->execute($query, $params);
 
@@ -49,7 +51,7 @@ class PersonController extends AbstractController
     {
 
         // удаление модели из базы данных
-        $query = "DELETE FROM person WHERE id=:id";
+        $query = "DELETE FROM list WHERE id=:id";
         $params = array(':id' => $id);
         $result = $this->db->execute($query, $params);
 
@@ -62,11 +64,11 @@ class PersonController extends AbstractController
     {
 
         // обновление модели в базе данных
-        $query = "UPDATE person SET name=:name, roleId=:roleId WHERE id=:id";
+        $query = "UPDATE list SET filmId=:filmId, personId=:personId WHERE id=:id";
         $params = array(
             ':id' => $id,
-            ':name' => $model->getName(),
-            ':roleId' => $model->getRoleId()
+            ':filmId' => $model->getFilmId(),
+            ':personId' => $model->getPersonId()
         );
         $result = $this->db->execute($query, $params);
         // обновление  локального массива
@@ -78,10 +80,10 @@ class PersonController extends AbstractController
 
     public function select()
     {
-        $sql_select = 'SELECT * FROM person';
+        $sql_select = 'SELECT * FROM list';
         $res = $this->db->select($sql_select);
         foreach ($res as $iter) {
-            echo '<div>' . $iter['id'] . ' - ' . $iter['name'] . ' - ' . $iter['roleId'] .'</div>';
+            echo '<div>' . $iter['id'] . ' - ' . $iter['filmId'] . ' - ' . $iter['personId'] . '</div>';
         }
     }
 
