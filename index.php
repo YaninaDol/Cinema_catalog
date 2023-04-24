@@ -1,13 +1,18 @@
 <?php
 
-use Controllers\UserController;
+
 
 require_once 'Controllers/UserController.php';
-require_once 'Objects/User.php';
+
 
 $test=new UserController();
-$test->updateModel(4,'test8','test8');
-$test->select();
+//$test->printAll();
+//$test->addModel('Test2','test2');
+//$test->printAll();
+//$test->deleteModel(7);
+//$test->printAll();
+//$test->updateModel(4,'test4','test4');
+//$test->select();
 
 
 $test->printAll();
