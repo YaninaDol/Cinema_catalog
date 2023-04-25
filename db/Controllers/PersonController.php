@@ -5,9 +5,9 @@ namespace db\Controllers;
 use Database;
 use db\Objects\Person;
 
-require_once('db/db.php');
+require_once(__DIR__.'/../db.php');
 require_once('AbstractController.php');
-require_once('db/Models/Person.php');
+require_once(__DIR__.'/../Models/Person.php');
 
 class PersonController extends AbstractController
 {
@@ -76,6 +76,19 @@ class PersonController extends AbstractController
         return $result;
     }
 
+    public function getByName($name)
+
+    {
+
+        foreach ($this->array_db as $item)
+        {
+            if($item->getName()==$name)
+            {
+                return $item;
+            }
+        }
+
+    }
 
     public function select()
     {

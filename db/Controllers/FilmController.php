@@ -5,9 +5,9 @@ namespace db\Controllers;
 use Database;
 use db\Objects\Film;
 
-require_once('db/db.php');
+require_once(__DIR__.'/../db.php');
 require_once('AbstractController.php');
-require_once('db/Models/Film.php');
+require_once(__DIR__.'/../Models/Film.php');
 
 class FilmController extends AbstractController
 {
@@ -110,6 +110,22 @@ class FilmController extends AbstractController
         foreach ($res as $iter) {
             echo '<div>' . $iter['id'] . ' - ' . $iter['name'] . ' - ' . $iter['category'] . ' - ' . $iter['imdb'] . ' - ' . $iter['country'] . ' - ' . $iter['isPopular'] . ' - ' . $iter['isPremium'] . ' - ' . $iter['subscribe'] . '</div>';
         }
+    }
+
+    public function findFilmsById($select_item)
+    {
+            $select_items=array();
+        foreach ($select_item as $iter)
+        {
+            foreach ($this->array_db as $item)
+            {
+                if($item->getId()==$iter->getFilmId())
+                {
+                    array_push($select_items,$item);
+                }
+            }
+        }
+       return $select_items;
     }
 
     public function printAll()

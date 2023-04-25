@@ -6,9 +6,9 @@ namespace db\Controllers;
 use Database;
 use db\Objects\ListPersons;
 
-require_once('db/db.php');
+require_once(__DIR__.'/../db.php');
 require_once('AbstractController.php');
-require_once('db/Models/ListPersons.php');
+require_once(__DIR__.'/../Models/ListPersons.php');
 
 class ListPersonsController extends AbstractController
 {
@@ -77,6 +77,19 @@ class ListPersonsController extends AbstractController
         return $result;
     }
 
+    public function getByAuthor($id)
+    {
+        $select_item=array();
+        foreach ($this->array_db as $iter)
+        {
+            if($iter->getPersonId()==$id)
+            {
+               array_push($select_item,$iter);
+            }
+        }
+        return $select_item;
+
+    }
 
     public function select()
     {

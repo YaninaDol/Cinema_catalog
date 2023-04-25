@@ -3,17 +3,17 @@
 
 use db\Controllers\UserController;
 
-require_once 'db/Controllers/UserController.php';
+require_once 'db/Controllers/FilmController.php';
 
 //test UserController
-$test=new UserController();
+//$test=new UserController();
 //$test->printAll();
 //$test->addModel(new \Models\User('0','test','test'));
 //$test->printAll();
 //$test->deleteModel(9);
 //$test->printAll();
 //$test->updateModel(4,new \Models\User('0','test','test'));
-$test->select();
+//$test->select();
 //$test->printAll();
 
 //test CategoryController
@@ -60,12 +60,12 @@ $test->select();
 //$test->printAll();
 
 //test FilmController
-//$test=new \db\Controllers\FilmController();
+$test=new \db\Controllers\FilmController();
 //$test->printAll();
 //$test->addModel(new \Models\Film('0',' Test',1,7.0,'Germany',1,1,'about love'));
 //$test->printAll();
 //$test->deleteModel(4);
 //$test->printAll();
 //$test->updateModel(1,new \Models\Film('0','Test2',1,7.0,'Germany',1,1,'about love'));
-//$test->select();
+$test->select();
 //$test->printAll();
