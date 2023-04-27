@@ -12,9 +12,11 @@ require_once('db/Models/User.php');
 class UserController extends AbstractController
 {
     private $db;
+    private $testUserController;
 
     public function __construct()
     {
+        $this->testUserController=new \TestUserController();
         $this->db = Database::getInstance();
 
         $this->fill();
@@ -32,19 +34,20 @@ class UserController extends AbstractController
 
     public function addModel($model)
     {
+        if($this->testUserController->testLogin($model->getLogin()) && $this->testUserController($model->getPassword())) {// добавление модели в базу данных
+            $query = "INSERT INTO 	user (login, password,isPremium) VALUES (:login,:password, :isPremium)";
+            $params = array(
+                ':login' => $model->getLogin(),
+                ':password' => $model->getPassword(),
+                ':isPremium' => 0
+            );
+            $result = $this->db->execute($query, $params);
 
-        // добавление модели в базу данных
-        $query = "INSERT INTO 	user (login, password,isPremium) VALUES (:login,:password, :isPremium)";
-        $params = array(
-            ':login' => $model->getLogin(),
-            ':password' => $model->getPassword(),
-            ':isPremium' => 0
-        );
-        $result = $this->db->execute($query, $params);
-
-        // обновление  локального массива
-        $this->fill();
-        return $result;
+            // обновление  локального массива
+            $this->fill();
+            return $result;
+        }
+        else echo 'Status code 400';
     }
 
     public function deleteModel($id)
